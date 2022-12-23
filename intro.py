@@ -24,7 +24,7 @@ def introSequence():
 
   print("Then I will return to you a list")
   #time.sleep(3)
-  print("It may look like this: [X,-,-,O]")
+  print("It may look like this: X--O")
   #time.sleep(3)
   print("The O means that you have one right number, but not in the right position")
   #time.sleep(4)

@@ -1,26 +1,33 @@
 import random
 
-def determineHint(guess, secretCode):
-  print("Determine hint " + str(secretCode))
+def determineHint(guess, code):
+
+
+  newGuess = list(guess)
+  newCode = list(code)
   
   defaultList = []
 
   # Count the number of correct colors in the correct position
   correct_color_and_position = 0
-  for i in range(4):
-    if guess[i] == secretCode[i]:
+  correct_color_wrong_position = 0
+
+  
+  for i in range(len(newGuess)):
+    if newGuess[i] == newCode[i]:
       correct_color_and_position += 1
       # Remove the correct pegs from the lists so we don't count them again
-      guess[i] = None
-      secretCode[i] = None
+      newGuess[i] = ""
+      newCode[i] = ""
 
+      
   # Count the number of correct colors in the wrong position
-  correct_color_wrong_position = 0
-  for i in range(4):
-    if guess[i] is not None:
-      if guess[i] in secretCode:
+  
+  for i in range(len(newGuess)):
+    if newGuess[i] != "":
+      if newGuess[i] in code:
         correct_color_wrong_position += 1
-        secretCode[secretCode.index(guess[i])] = None
+        #newCode[newCode.index(newGuess[i])] = ""
 
   for i in range(correct_color_and_position):
     defaultList.append("X")
@@ -30,9 +37,8 @@ def determineHint(guess, secretCode):
   while len(defaultList) < 4:
     defaultList.append("-")
 
-  print("Default list " + str(defaultList))
 
   #print("original " + str(defaultList))
   random.shuffle(defaultList)
 
-  return defaultList
+  print("Hint: " + ' '.join(defaultList) + "\n")

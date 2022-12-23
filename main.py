@@ -48,33 +48,29 @@ def endSequence(secretCode, attempts):  # void
   print("It took you " + str(attempts) + " attempts!")
 
 
-
-
 if __name__ == "__main__":
   secretCode = generateCode()
   intro.introSequence()
-  print("ORIGINAL " + str(secretCode))
-  
+  #print("ORIGINAL " + str(secretCode))
+
   correct = False
-  
+
   for i in range(10):
-    print("FOR" + str(secretCode))
-    
     guess = getGuess()
     #guess is now a string
     guess = guess.split()
-  
+
     #this takes it from a list of strings to a list of ints
     guess = list(map(int, guess))
-  
+
     # automatically ends if it's the correct guess
     if checkRightGuess(guess, secretCode) == True:
       endSequence(secretCode, i + 1)
       correct = True
       break
-  
-    print("Hint: " + ' '.join(determineHint(guess, secretCode)) + "\n")
-  
+
+    determineHint(guess, secretCode)
+
   if correct == False:
     print("\nYou couldn't guess it in time")
     print("The secret code was " + str(secretCode))
