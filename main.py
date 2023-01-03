@@ -3,11 +3,13 @@ import intro
 from determineHint import determineHint
 
 
+
 def generateCode():  # returns code as a list
   code = []
   for i in range(4):
     code.append(random.randint(1, 4))
 
+  print(code)
   return code
 
 
