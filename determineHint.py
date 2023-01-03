@@ -27,7 +27,7 @@ def determineHint(guess, code):
     if newGuess[i] != "":
       if newGuess[i] in code:
         correct_color_wrong_position += 1
-        #newCode[newCode.index(newGuess[i])] = ""
+        newCode[newCode.index(newGuess[i])] = ""
 
   for i in range(correct_color_and_position):
     defaultList.append("X")
