@@ -1,10 +1,10 @@
 import random
 
 
-def determineHint(guess, code):
+def determineHint(guess, secret):
 
   newGuess = list(guess)
-  newCode = list(code)
+  newSecret = list(secret)
 
   defaultList = []
 
@@ -12,20 +12,27 @@ def determineHint(guess, code):
   correct_color_and_position = 0
   correct_color_wrong_position = 0
 
+  guess_copy = newGuess.copy()
+  secret_copy = secret.copy()
+
   for i in range(len(newGuess)):
-    if newGuess[i] == newCode[i]:
+    if newGuess[i] == newSecret[i]:
       correct_color_and_position += 1
       # Remove the correct pegs from the lists so we don't count them again
-      newGuess[i] = ""
-      newCode[i] = ""
+      guess_copy.remove(newGuess[i])
+      secret_copy.remove(newSecret[i])
+      
+      #newGuess[i] = ""
+      #newCode[i] = ""
 
   # Count the number of correct colors in the wrong position
 
-  for i in range(len(newGuess)):
-    if newGuess[i] != "":
-      if newGuess[i] in code:
-        correct_color_wrong_position += 1
-        newCode[newCode.index(newGuess[i])] = ""
+  for i in range(len(guess_copy)):
+    if guess_copy[i] in secret_copy:
+      correct_color_wrong_position += 1
+
+      secret_copy.remove(guess_copy[i])
+      #newCode[newCode.index(newGuess[i])] = ""
 
   for i in range(correct_color_and_position):
     defaultList.append("X")
@@ -34,6 +41,8 @@ def determineHint(guess, code):
 
   while len(defaultList) < 4:
     defaultList.append("-")
+
+  
 
   #print("original " + str(defaultList))
   random.shuffle(defaultList)
